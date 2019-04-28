@@ -52,7 +52,7 @@ public class DatabaseConnection {
     }
 
 
-    private void executeQuery(String sql, String name, String phone) {
+    public void executeQuery(String sql, String name, String phone) {
         try {
             databaseConnect();
 
@@ -71,6 +71,26 @@ public class DatabaseConnection {
             databaseDisconnect();
         }
     }
+
+    public void executeQuery(String sql, String phone) {
+        try {
+            databaseConnect();
+
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, phone);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (connection != null) {
+            databaseDisconnect();
+        }
+    }
+
 
     public static ResultSet dbExecute(String slqQuery) throws ClassNotFoundException, SQLException {
         CachedRowSetImpl cachedRowSet = null;

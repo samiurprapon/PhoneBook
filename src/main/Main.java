@@ -7,24 +7,19 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.InputStream;
-
 public class Main extends Application {
 
-    public static Stage openStage = null;
-    InputStream is;
     private static Image appIcon = new Image("/resources/drawable/icon.png");
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        openStage = primaryStage;
-        openStage.getIcons().add(appIcon);
+        primaryStage.getIcons().add(appIcon);
 
-        Parent root = FXMLLoader.load(getClass().getResource("/resources/show_contacts.fxml"));
-        openStage.setTitle("Phone Book");
-        openStage.setScene(new Scene(root));
-        openStage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("/resources/home_page.fxml"));
+        primaryStage.setTitle("Phone Book");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
 
     }
 
