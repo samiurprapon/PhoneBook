@@ -21,7 +21,7 @@ public class Main extends Application {
         openStage = primaryStage;
         openStage.getIcons().add(appIcon);
 
-        Parent root = FXMLLoader.load(getClass().getResource("/resources/Contacts.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/resources/show_contacts.fxml"));
         openStage.setTitle("Phone Book");
         openStage.setScene(new Scene(root));
         openStage.show();

@@ -12,32 +12,30 @@ import java.io.IOException;
 
 import static main.Main.openStage;
 
-public class CreateContact {
+public class UpdateContact {
+
+    private DatabaseConnection connection = new DatabaseConnection();
 
     @FXML
-    TextField mName = new TextField();
-    @FXML
-    TextField mPhone;
+    public TextField tf_name;
 
     @FXML
-    Button mBack;
-
-    DatabaseConnection connection = new DatabaseConnection();
-
-
+    public Button btn_update;
     @FXML
-    private void saveToDatabase() {
-        System.out.println("Clicked");
-        String name = mName.getText();
+    public TextField tf_phone;
 
-        String phone = mPhone.getText();
+    public void updateContact() {
+        String name = tf_name.getText();
+        String phone = tf_phone.getText();
 
-        connection.createContact(name, phone);
+        if (name != null && phone != null) {
+
+            connection.updateContact(phone, name);
+        }
 
     }
 
     public void backToHome() {
-
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("/resources/show_contacts.fxml"));
@@ -49,4 +47,5 @@ public class CreateContact {
         }
 
     }
+
 }

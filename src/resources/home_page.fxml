@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchor_pane_parent" prefHeight="530.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/9.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomePage">
+    <children>
+        <Pane fx:id="pane_top" prefHeight="60.0" prefWidth="899.0">
+            <children>
+                <Label fx:id="label_title" layoutX="20.0" layoutY="2.0" prefHeight="32.0" prefWidth="375.0"
+                       text="Phone Book ">
+                    <font>
+                        <Font name="Lucida Calligraphy Italic" size="36.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <AnchorPane fx:id="anchorpane_center" layoutX="12.0" layoutY="64.0" prefHeight="459.0" prefWidth="875.0">
+            <children>
+                <AnchorPane fx:id="anchorpane_left" layoutX="14.0" layoutY="14.0" prefHeight="439.0" prefWidth="274.0">
+                    <children>
+                        <TextField fx:id="txt_firstname" layoutX="14.0" layoutY="80.0" prefHeight="25.0"
+                                   prefWidth="244.0" promptText="username"/>
+                        <TextField fx:id="txt_lastname" layoutX="15.0" layoutY="177.0" prefHeight="25.0"
+                                   prefWidth="244.0" promptText="Phone"/>
+                        <Button fx:id="btn_save" layoutX="15.0" layoutY="400.0" prefHeight="25.0" prefWidth="55.0"
+                                text="Save"/>
+                        <Button fx:id="btn_edit" layoutX="135.0" layoutY="400.0" prefHeight="25.0" prefWidth="55.0"
+                                text="Edit"/>
+                        <Button fx:id="btn_delete" layoutX="195.0" layoutY="400.0" prefHeight="25.0" prefWidth="55.0"
+                                text="Delete"/>
+                        <Button fx:id="btn_add_new" layoutX="75.0" layoutY="400.0" prefHeight="25.0" prefWidth="55.0"
+                                text="New"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="anchorpane_right" layoutX="294.0" layoutY="14.0" prefHeight="439.0"
+                            prefWidth="575.0">
+                    <children>
+                        <TableView fx:id="tableView" layoutX="9.0" layoutY="35.0" prefHeight="390.0" prefWidth="558.0">
+                            <columns>
+                                <TableColumn fx:id="column_username" prefWidth="279.199951171875" text="Username"/>
+                                <TableColumn fx:id="column_phone" minWidth="0.0" prefWidth="275.20001220703125"
+                                             text="Phone Number"/>
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

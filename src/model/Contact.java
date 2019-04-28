@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableValue;
 public class Contact {
     private String phone;
     private String name;
-    private String image;
 
     private StringProperty nameproperty;
     private  StringProperty phoneNumberProperty;
@@ -27,7 +26,6 @@ public class Contact {
     public Contact(String phone, String name, String image) {
         this.phone = phone;
         this.name = name;
-        this.image = image;
     }
 
     public ObservableValue<String> getPhoneValue() {
@@ -38,10 +36,6 @@ public class Contact {
         return nameproperty;
     }
 
-    public String getImage() {
-        return image;
-    }
-
 
     public void setPhone(String phone) {
         this.phone = phone;
@@ -49,10 +43,6 @@ public class Contact {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getPhone() {

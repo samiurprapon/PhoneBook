@@ -27,31 +27,6 @@ public class DatabaseConnection {
             throw  e;
         }
     }
-
-    public static void executeQuery(String query) {
-        Statement statement = null;
-
-        try {
-            databaseConnect();
-            statement = connection.createStatement();
-            statement.executeQuery(query);
-
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            databaseDisconnect();
-        }
-
-    }
-
     private static void databaseDisconnect(){
 
         try {
@@ -66,11 +41,22 @@ public class DatabaseConnection {
     public void createContact(String name, String phone) {
         String sql = "INSERT INTO peoples(name, phone) VALUES(?, ?)";
 
+        executeQuery(sql, name, phone);
+
+    }
+
+    public void updateContact(String phone, String name) {
+        String sql = "UPDATE peoples SET name = ?  WHERE phone = "+phone;
+
+        executeQuery(sql, name, phone);
+    }
+
+
+    private void executeQuery(String sql, String name, String phone) {
         try {
             databaseConnect();
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-
             pstmt.setString(1, name);
             pstmt.setString(2, phone);
 
@@ -80,15 +66,17 @@ public class DatabaseConnection {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
 
+        if (connection != null) {
+            databaseDisconnect();
+        }
+    }
 
     public static ResultSet dbExecute(String slqQuery) throws ClassNotFoundException, SQLException {
         CachedRowSetImpl cachedRowSet = null;
 
         databaseConnect();
         try (Statement statement = connection.createStatement(); ResultSet rs = statement.executeQuery(slqQuery)) {
-
             cachedRowSet = new CachedRowSetImpl();
             cachedRowSet.populate(rs);
         } catch (SQLException e) {
