@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.Contact;
 
 import java.net.URL;
@@ -23,6 +20,7 @@ public class HomePage implements Initializable {
 
     @FXML
     public Button btn_save;
+    public Label popup;
 
     @FXML
     private TableView<Contact> tableView;
@@ -46,17 +44,39 @@ public class HomePage implements Initializable {
 
     private void addContact()  {
         String name = mName.getText();
-
         String phone = mPhone.getText();
 
-        connection.createContact(name, phone);
-        tableInit();
+        if (popup.isVisible()) {
+            popup.setVisible(false);
+        }
+
+        if(!name.isEmpty() && !phone.isEmpty()) {
+            connection.createContact(name, phone);
+            tableInit();
+
+            mPhone.clear();
+            mName.clear();
+        } else {
+            if(name.isEmpty() && phone.isEmpty()) {
+                popup.setText("*Please Insert Information");
+                popup.setVisible(true);
+            }
+            else if (name.isEmpty()) {
+                popup.setText("*Please Insert Name");
+                popup.setVisible(true);
+            }
+            else {
+                popup.setText("*Please Insert Phone Number");
+                popup.setVisible(true);
+            }
+
+        }
     }
 
     private void deleteContact() {
 
         if (tableView.getSelectionModel().getSelectedItem() == null) {
-            System.out.println(" No item selected");
+            System.out.println("No item selected");
         } else {
             column_username.setCellValueFactory(cellData -> cellData.getValue().getNameValue());
             column_phone.setCellValueFactory(cellData -> cellData.getValue().getPhoneValue());
