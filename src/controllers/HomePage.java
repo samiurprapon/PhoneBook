@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import model.Contact;
 
 import java.net.URL;
@@ -21,6 +22,7 @@ public class HomePage implements Initializable {
     @FXML
     public Button btn_save;
     public Label popup;
+    public AnchorPane home;
 
     @FXML
     private TableView<Contact> tableView;
@@ -37,10 +39,14 @@ public class HomePage implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         tableInit();
-        btn_save.setOnAction(event -> addContact());
+        mPhone.setFocusTraversable(false);
+        mName.setFocusTraversable(false);
 
         btn_delete.setOnAction(event -> deleteContact());
+        btn_save.setOnAction(event -> addContact());
     }
+
+
 
     private void addContact()  {
         String name = mName.getText();
@@ -133,7 +139,7 @@ public class HomePage implements Initializable {
             while (rs.next()) {
                 Contact contact = new Contact();
 
-                contact.setNameproperty(rs.getString("name"));
+                contact.setNameProperty(rs.getString("name"));
                 contact.setPhoneNumber(rs.getString("phone"));
                 contactList.add(contact);
 

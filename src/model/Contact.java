@@ -8,22 +8,16 @@ public class Contact {
     private String phone;
     private String name;
 
-    private StringProperty nameproperty;
+    private StringProperty nameProperty;
     private  StringProperty phoneNumberProperty;
 
+    // default constructor
     public Contact() {
-        // default constructor
-
-        this.nameproperty = new SimpleStringProperty();
+        this.nameProperty = new SimpleStringProperty();
         this.phoneNumberProperty = new SimpleStringProperty();
     }
 
     public Contact(String phone, String name ) {
-        this.phone = phone;
-        this.name = name;
-    }
-
-    public Contact(String phone, String name, String image) {
         this.phone = phone;
         this.name = name;
     }
@@ -33,44 +27,16 @@ public class Contact {
     }
 
     public ObservableValue<String> getNameValue() {
-        return nameproperty;
+        return nameProperty;
     }
 
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public void setPhoneNumber(String phoneNumberProperty) {
         this.phoneNumberProperty.set(phoneNumberProperty);
     }
 
-    public StringProperty getPhoneNumberProperty() {
-        return phoneNumberProperty;
-    }
-
-    public String getNameproperty() {
-        return nameproperty.get();
-    }
-
-    public StringProperty namepropertyProperty() {
-        return nameproperty;
-    }
-
-    public void setNameproperty(String nameproperty) {
-        this.nameproperty.set(nameproperty);
+    public void setNameProperty(String nameProperty) {
+        this.nameProperty.set(nameProperty);
     }
 
     @Override

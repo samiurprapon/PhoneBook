@@ -9,14 +9,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static Image appIcon = new Image("/resources/drawable/icon.png");
+    private static Image appIcon = new Image("/resources/drawable/ic_confused.png");
+    public static boolean isSplashLoaded = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        Parent root = FXMLLoader.load(getClass().getResource("/resources/layout/main_stage.fxml"));
         primaryStage.getIcons().add(appIcon);
-
-        Parent root = FXMLLoader.load(getClass().getResource("/resources/home_page.fxml"));
         primaryStage.setTitle("Phone Book");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
@@ -26,4 +25,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }

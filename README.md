@@ -8,11 +8,17 @@
   * IntelliJ IDEA
 
 #### Features  #### 
+   * Splash Screen
    * Add New Contact
    * Delete Contact 
 
 ##### ScreenShot ##### 
-![screenshot](https://github.com/samiurprapon/PhoneBook/blob/master/screenshot.png)
+
+![screenshot](https://github.com/samiurprapon/PhoneBook/tree/master/src/resources/drawable/screenshot1.png)
+
+![screenshot](https://github.com/samiurprapon/PhoneBook/blob/master/src/resources/drawable/screenshot3.png)
+
+![screenshot](https://github.com/samiurprapon/PhoneBook/blob/master/src/resources/drawable/screenshot.png)
 
 
 > Please **Do not use** this code to submit **University Project**
