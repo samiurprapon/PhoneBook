@@ -14,7 +14,7 @@
 
 ##### ScreenShot ##### 
 
-![screenshot](https://github.com/samiurprapon/PhoneBook/tree/master/src/resources/drawable/screenshot1.png)
+![screenshot](https://raw.githubusercontent.com/samiurprapon/PhoneBook/master/src/resources/drawable/screenshot1.png)
 
 ![screenshot](https://github.com/samiurprapon/PhoneBook/blob/master/src/resources/drawable/screenshot3.png)
 
