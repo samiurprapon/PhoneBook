@@ -1,12 +1,17 @@
 package controllers;
 
 import database.DatabaseConnection;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import model.Contact;
 
 import java.net.URL;
@@ -22,31 +27,70 @@ public class HomePage implements Initializable {
     @FXML
     public Button btn_save;
     public Label popup;
-    public AnchorPane home;
+    public Button btn_update;
+    public AnchorPane insert_pane;
 
     @FXML
     private TableView<Contact> tableView;
     public TextField mName;
     public TextField mPhone;
 
+    Contact contact;
+
     @FXML
     TableColumn<Contact, String> column_username;
     @FXML
     TableColumn<Contact, String> column_phone;
 
-    private DatabaseConnection connection = new DatabaseConnection();
+    private DatabaseConnection connection;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        connection = new DatabaseConnection();
         tableInit();
-        mPhone.setFocusTraversable(false);
-        mName.setFocusTraversable(false);
 
-        btn_delete.setOnAction(event -> deleteContact());
-        btn_save.setOnAction(event -> addContact());
+        btn_save.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                addContact();
+            }
+        });
+
+        btn_delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                deleteContact();
+            }
+        });
+        btn_update.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                updateContact();
+            }
+        });
+
+        tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getClickCount() > 0) {
+                    onEdit();
+                }
+            }
+        });
+
     }
 
+    public void onEdit() {
+        // check the table's selected item and get selected item
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            column_username.setCellValueFactory(cellData -> cellData.getValue().getNameValue());
+            column_phone.setCellValueFactory(cellData -> cellData.getValue().getPhoneValue());
 
+            Contact contact = tableView.getSelectionModel().getSelectedItem();
+            mPhone.setText(contact.getPhoneValue().getValue());
+            mName.setText(contact.getNameValue().getValue());
+        }
+    }
 
     private void addContact()  {
         String name = mName.getText();
@@ -57,7 +101,9 @@ public class HomePage implements Initializable {
         }
 
         if(!name.isEmpty() && !phone.isEmpty()) {
-            connection.createContact(name, phone);
+            contact = new Contact(name, phone);
+
+            connection.createContact(contact);
             tableInit();
 
             mPhone.clear();
@@ -89,22 +135,56 @@ public class HomePage implements Initializable {
 
             Contact contact = tableView.getSelectionModel().getSelectedItem();
             String phone  = contact.getPhoneValue().getValue();
-            String sql = "DELETE FROM peoples WHERE phone = ?";
 
             tableView.getItems().removeAll(contact);
 
+            mPhone.clear();
+            mName.clear();
 
+            String sql = "DELETE FROM peoples WHERE phone = ?";
             connection.executeQuery(sql, phone);
+
+            tableInit();
         }
 
-        tableView.refresh();
+
+    }
+
+    private void updateContact() {
+
+        if (tableView.getSelectionModel().getSelectedItem() == null) {
+            System.out.println("No item selected");
+        } else {
+            String name = mName.getText();
+            String phone = mPhone.getText();
+
+            mPhone.clear();
+            mName.clear();
+
+            contact = new Contact(name, phone);
+
+            connection.updateContact(contact);
+
+        }
+        tableInit();
+
     }
 
 
     @FXML
     private void tableInit(){
-        column_username.setCellValueFactory(cellData -> cellData.getValue().getNameValue());
-        column_phone.setCellValueFactory(cellData -> cellData.getValue().getPhoneValue());
+        column_username.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Contact, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Contact, String> cellData) {
+                return cellData.getValue().getNameValue();
+            }
+        });
+        column_phone.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Contact, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Contact, String> cellData) {
+                return cellData.getValue().getPhoneValue();
+            }
+        });
 
         ObservableList<Contact> contactList = null;
         try {
@@ -142,8 +222,6 @@ public class HomePage implements Initializable {
                 contact.setNameProperty(rs.getString("name"));
                 contact.setPhoneNumber(rs.getString("phone"));
                 contactList.add(contact);
-
-//                System.out.println(contact);
             }
             return contactList;
         } catch (SQLException e) {
@@ -157,6 +235,4 @@ public class HomePage implements Initializable {
     private void populateTable(ObservableList<Contact> contactList) {
         tableView.setItems(contactList);
     }
-
-
 }

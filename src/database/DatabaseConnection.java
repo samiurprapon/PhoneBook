@@ -1,6 +1,7 @@
 package database;
 
 import com.sun.rowset.CachedRowSetImpl;
+import model.Contact;
 
 import java.sql.*;
 
@@ -18,7 +19,7 @@ public class DatabaseConnection {
             throw e;
         }
 
-        System.out.println("JDBC Driver has been registered");
+//        System.out.println("JDBC Driver has been registered");
 
         try {
             connection = DriverManager.getConnection(DATABASE_NAME);
@@ -27,6 +28,7 @@ public class DatabaseConnection {
             throw  e;
         }
     }
+
     private static void databaseDisconnect(){
 
         try {
@@ -38,15 +40,21 @@ public class DatabaseConnection {
         }
     }
 
-    public void createContact(String name, String phone) {
+    public void createContact(Contact contact) {
+        String name = contact.getName();
+        String phone = contact.getPhone();
+
         String sql = "INSERT INTO peoples(name, phone) VALUES(?, ?)";
 
         executeQuery(sql, name, phone);
 
     }
 
-    public void updateContact(String phone, String name) {
-        String sql = "UPDATE peoples SET name = ?  WHERE phone = "+phone;
+    public void updateContact(Contact contact) {
+        String name = contact.getName();
+        String phone = contact.getPhone();
+
+        String sql = "UPDATE peoples SET name = ?  WHERE phone = ?";
 
         executeQuery(sql, name, phone);
     }

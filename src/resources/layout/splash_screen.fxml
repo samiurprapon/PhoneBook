@@ -6,7 +6,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="530.0" prefWidth="899.0" style="-fx-background-color: #e7dfdd;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <ImageView fitHeight="120.0" fitWidth="107.0" layoutX="400.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="/resources/drawable/cat_loading.gif" />
+        <Image url="/resources/drawable/ic_loading.gif" />
     </ImageView>
     <ImageView fitHeight="200" fitWidth="200.0" layoutX="368.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
         <Image url="/resources/drawable/ic_confused.png" />

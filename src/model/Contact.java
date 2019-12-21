@@ -11,13 +11,14 @@ public class Contact {
     private StringProperty nameProperty;
     private  StringProperty phoneNumberProperty;
 
-    // default constructor
     public Contact() {
+        // default constructor
+
         this.nameProperty = new SimpleStringProperty();
         this.phoneNumberProperty = new SimpleStringProperty();
     }
 
-    public Contact(String phone, String name ) {
+    public Contact(String name, String phone ) {
         this.phone = phone;
         this.name = name;
     }
@@ -31,9 +32,34 @@ public class Contact {
     }
 
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public void setPhoneNumber(String phoneNumberProperty) {
         this.phoneNumberProperty.set(phoneNumberProperty);
     }
+
+    public StringProperty getPhoneNumberProperty() {
+        return phoneNumberProperty;
+    }
+
+    public String getNameProperty() {
+        return nameProperty.get();
+    }
+
 
     public void setNameProperty(String nameProperty) {
         this.nameProperty.set(nameProperty);

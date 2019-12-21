@@ -18,7 +18,7 @@
 
 ![screenshot](https://github.com/samiurprapon/PhoneBook/blob/master/src/resources/drawable/screenshot3.png)
 
-![screenshot](https://github.com/samiurprapon/PhoneBook/blob/master/src/resources/drawable/screenshot.png)
+![screenshot](https://github.com/samiurprapon/PhoneBook/blob/master/src/resources/drawable/screenshot(updated).png)
 
 
 > Please **Do not use** this code to submit **University Project**
