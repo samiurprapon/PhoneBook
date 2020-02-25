@@ -11,6 +11,7 @@
    * Splash Screen
    * Add New Contact
    * Delete Contact 
+   * Update Contact
 
 ##### ScreenShot ##### 
 
