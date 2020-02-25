@@ -1,7 +1,7 @@
 # PhoneBook
 ### A Simple Project based on ###
    * Java 1.8 (Back End)
-   * Jafafx (Front End)
+   * Javafx (Front End)
    * SQLite (Database)
 
 ### IDE ###
